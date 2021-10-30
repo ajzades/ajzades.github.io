@@ -135,8 +135,20 @@ Checkout my Instagram to learn a bit more about me! </a>
         <li>Let the cookies cool for ten minutes on the baking sheet then move to a cooling rack. Eat!
       </li> </div> </div class>
 
+<script type= "text/javascript">
+
+function setNewImage()
+{document.getElementById("img1").src="https://i.dailymail.co.uk/1s/2019/10/13/21/19666046-0-image-a-47_1570999578969.jpg";
+  }
+function setOldImage()
+{document.getElementById("img1").src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gbbo-talent-120r-1628089531.jpg";
+  }
+
+</script>
+
       <div class="gallery">
-          <img src= https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gbbo-talent-120r-1628089531.jpg width="600" height="400">
+          <img id= "img1" onmouseover="setNewImage()" onmouseout="setOldImage"
+          src= https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gbbo-talent-120r-1628089531.jpg width="600" height="400">
         </div>
         <div class= "gallery">
           <img src= https://imgix.bustle.com/uploads/image/2020/7/28/3b487de3-8b75-43bf-bf2a-6fbfd8cf7e07-bake-off.jpg?w=800&fit=crop&crop=faces&auto=format%2Ccompress width="800" height="600">

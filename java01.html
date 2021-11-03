@@ -143,7 +143,7 @@ function toggleImage() {
 
    var imgElement = document.getElementById('toggleImage');
 
-   imgElement.src = (imgElement.src === img1)? img2 : img1;
+   imgElement.src = (imgElement.src = img1) img2 : img1;
 }
 </script>
 <img src="https://imgs.heart.co.uk/images/201895?crop=16_9&width=660&relax=1&signature=nyOYqevJu5OZ6ePaZHRWcdkZuBM=" id="toggleImage" onclick="toggleImage();"/>

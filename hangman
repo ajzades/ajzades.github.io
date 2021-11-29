@@ -5,6 +5,7 @@
   <style>
      p { font-size: 24pt;}
      #game { width: 50%; margin: auto; }
+     #messages { color: blue;}
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
@@ -12,11 +13,14 @@
       // $(document) is the jQuery reference to the whole web page
       $(document).ready( function() {
         // put your javascript here
-        var word =   "h a n g m a n"; // the word to guess
-        var blanks = "- - - - - - -"; // this variable holds the temporary information
-        var guesses = 10; // the number of guesses left
+        var word =   "jazzercise"; // the word to guess
+        var blanks = "- - - - - - - - - -"; // this variable holds the temporary information
+        var guesses = 30; // the number of guesses left
         var guessed  = []; // these are the letters that have already been guessed
         var finished = false; // change to true when the game is finished
+
+        $("#guesses").html(guesses);
+        $("#word").html(blanks); 
 
 
       });

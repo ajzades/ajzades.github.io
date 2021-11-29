@@ -20,7 +20,7 @@
         var finished = false; // change to true when the game is finished
 
         $("#guesses").html(guesses);
-        $("#word").html(blanks); 
+        $("#word").html(blanks);
 
 
       });
@@ -64,3 +64,4 @@
 </div>
 
 </body>
+</html>

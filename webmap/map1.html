@@ -11,12 +11,14 @@
     <body>
       <--!our webmap content will be going here-->
       <div id="map" style="width: 705px; height: 375px"></div>
+
       <script>
+        // Create variable to hold map element, give initial settings to map
+        var map = L.map('map',{ center: [39.743218, -105.004568], zoom: 14});
         // Add OpenStreetMap tile layer to map element
 var defaultBase = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                       { attribution: '© OpenStreetMap' }).addTo(map);
-	// Create variable to hold map element, give initial settings to map
-	var map = L.map('map',{ center: [39.743218, -105.004568], zoom: 14});
+
 </script>
       </body>
       </html>

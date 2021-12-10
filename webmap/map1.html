@@ -1,7 +1,7 @@
 <<!DOCTYPE html>
 <html>
 <head>
-  <title> Leaflet Map </title>
+  <title> My First Leaflet Map </title>
   <!-- External Stylesheets -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 <!-- Add the Leaflet JavaScript library -->
@@ -10,18 +10,16 @@
   <script>
     // wait for the page to load before running the javascript
      $(document).ready( function() {
-         // put your javascript here
-       });
+       // Create variable to hold map element, give initial settings to map
+       var map = L.map('map',{ center: [39.743218, -105.004568], zoom: 14});
 
-      <--!our webmap content will be going here-->
-      <div id="map" style="width: 705px; height: 375px"></div>
-    // Create variable to hold map element, give initial settings to map
-    var map = L.map('map',{ center: [39.743218, -105.004568], zoom: 14});
     // Add OpenStreetMap tile layer to map element
   var defaultBase = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                   { attribution: '© OpenStreetMap' }).addTo(map);
+
                   // Create point feature for Auraria Library
   var myDataPoint = L.marker([39.743119, -105.002959]).addTo(map);
+  
   // Create area feature for campus, style and add to map
   var myArea = L.polygon([[39.740652, -105.010233], [39.743218, -105.011864],
   [39.748473, -105.002487], [39.740283, -104.999037]],
@@ -34,12 +32,15 @@
 
   // Create an Empty Popup
   var popup = L.popup();
+
   // Write function to set Properties of the Popup
   function onMapClick(e) {
   popup
   .setLatLng(e.latlng)
   .setContent("You clicked the map at " + e.latlng.toString())
-  .openOn(map); }
+  .openOn(map);
+  console.log("Clicked on the map");
+  }
 
   // Listen for a click event on the Map element
   map.on('click', onMapClick);
@@ -47,7 +48,7 @@
   //load a geojson from an externalfile
     $.getJSON("buildings.json",function(data){
     	// add GeoJSON layer to the map once the file is loaded
-    buildings = L.geoJson(data,{
+        L.geoJson(data,{
             onEachFeature: function (feature, layer) {
                 layer.bindPopup("Building Type: " + feature.properties.BLDG_TYPE +
                 "<br>Building Height: " +  feature.properties.BLDG_HEIGH +
@@ -57,8 +58,6 @@
 
     	).addTo(map);
     });
-
-  });
 
   // Closing for the document.ready function
   });

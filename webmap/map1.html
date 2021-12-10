@@ -6,43 +6,49 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 <!-- Add the Leaflet JavaScript library -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-    </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+// wait for the page to load before running the javascript
+ $(document).ready( function() {
+     // put your javascript here
+<--!our webmap content will be going here-->
+<div id="map" style="width: 705px; height: 375px"></div>
 
-    <body>
-      <--!our webmap content will be going here-->
-      <div id="map" style="width: 705px; height: 375px"></div>
-
-      <script>
-        // Create variable to hold map element, give initial settings to map
-        var map = L.map('map',{ center: [39.743218, -105.004568], zoom: 14});
-        // Add OpenStreetMap tile layer to map element
+<script>
+  // Create variable to hold map element, give initial settings to map
+  var map = L.map('map',{ center: [39.743218, -105.004568], zoom: 14});
+  // Add OpenStreetMap tile layer to map element
 var defaultBase = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-                      { attribution: '© OpenStreetMap' }).addTo(map);
-                      // Create point feature for Auraria Library
+                { attribution: '© OpenStreetMap' }).addTo(map);
+                // Create point feature for Auraria Library
 var myDataPoint = L.marker([39.743119, -105.002959]).addTo(map);
-  // Create area feature for campus, style and add to map
+// Create area feature for campus, style and add to map
 var myArea = L.polygon([[39.740652, -105.010233], [39.743218, -105.011864],
-	[39.748473, -105.002487], [39.740283, -104.999037]],
-	{color: 'blue', weight: 4}).addTo(map);
+[39.748473, -105.002487], [39.740283, -104.999037]],
+{color: 'blue', weight: 4}).addTo(map);
 
-  // Bind popup to Data Point object
-  myDataPoint.bindPopup("<h3>Auraria Library</h3><p>Denver, CO</p>");
-  // Bind popup to area object
+// Bind popup to Data Point object
+myDataPoint.bindPopup("<h3>Auraria Library</h3><p>Denver, CO</p>");
+// Bind popup to area object
 myArea.bindPopup("Auraria Campus");
 
 // Create an Empty Popup
 var popup = L.popup();
 // Write function to set Properties of the Popup
 function onMapClick(e) {
-	popup
-    	.setLatLng(e.latlng)
-    	.setContent("You clicked the map at " + e.latlng.toString())
-    	.openOn(map); }
+popup
+.setLatLng(e.latlng)
+.setContent("You clicked the map at " + e.latlng.toString())
+.openOn(map); }
 
-      // Listen for a click event on the Map element
+// Listen for a click event on the Map element
 map.on('click', onMapClick);
-
-
 </script>
+    </head>
+
+
+    <body>
+
+
+
       </body>
       </html>

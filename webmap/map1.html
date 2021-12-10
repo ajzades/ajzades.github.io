@@ -31,10 +31,10 @@ var myArea = L.polygon([[39.740652, -105.010233], [39.743218, -105.011864],
 myArea.bindPopup("Auraria Campus");
 
 // Create an Empty Popup
-var Popup = L.popup();
+var popup = L.popup();
 // Write function to set Properties of the Popup
 function onMapClick(e) {
-	Popup
+	popup
     	.setLatLng(e.latlng)
     	.setContent("You clicked the map at " + e.latlng.toString())
     	.openOn(map); }

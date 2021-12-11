@@ -8,58 +8,76 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
-    // wait for the page to load before running the javascript
-     $(document).ready( function() {
-       // Create variable to hold map element, give initial settings to map
-       var map = L.map('map',{ center: [39.743218, -105.004568], zoom: 14});
+      // wait for the page to load before running the javascript
+       $(document).ready( function() {
+         // Create variable to hold map element, give initial settings to map
+         var map = L.map('map',{ center: [39.743218, -105.004568], zoom: 14});
 
-    // Add OpenStreetMap tile layer to map element
-  var defaultBase = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-                  { attribution: '© OpenStreetMap' }).addTo(map);
+      // Add OpenStreetMap tile layer to map element
+    var defaultBase = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                    { attribution: '© OpenStreetMap' }).addTo(map);
 
-                  // Create point feature for Auraria Library
-  var myDataPoint = L.marker([39.743119, -105.002959]).addTo(map);
+                    //watercolor stamen tilemap
+                    var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+  	                   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  	                    subdomains: 'abcd',
+  	                     minZoom: 1,
+  	                      maxZoom: 16,
+  	                       ext: 'jpg'
+                         });
 
-  // Create area feature for campus, style and add to map
-  var myArea = L.polygon([[39.740652, -105.010233], [39.743218, -105.011864],
-  [39.748473, -105.002487], [39.740283, -104.999037]],
-  {color: 'blue', weight: 4}).addTo(map);
+                    //part two of lab, add basemaps
+                    var basemaps = {"Default Basemap:" , defaultbase,
+                                    "Stamen Watercolor" : Stamen_Watercolor};
+                    var overlays = {};
+                    var layerMenu = L.control.layers(basemaps, overlays).addTo(map);
 
-  // Bind popup to Data Point object
-  myDataPoint.bindPopup("<h3>Auraria Library</h3><p>Denver, CO</p>");
-  // Bind popup to area object
-  myArea.bindPopup("Auraria Campus");
+                    // Create point feature for Auraria Library
+    var myDataPoint = L.marker([39.743119, -105.002959]).addTo(map);
 
-  // Create an Empty Popup
-  var popup = L.popup();
+    // Create area feature for campus, style and add to map
+    var myArea = L.polygon([[39.740652, -105.010233], [39.743218, -105.011864],
+    [39.748473, -105.002487], [39.740283, -104.999037]],
+    {color: 'blue', weight: 4}).addTo(map);
+    layerMenu.addOverlay(myArea, "Auraria Campus");
+    layerMenu.addOverlay(myDataPoint, "Auraria Library");
 
-  // Write function to set Properties of the Popup
-  function onMapClick(e) {
-  popup
-  .setLatLng(e.latlng)
-  .setContent("You clicked the map at " + e.latlng.toString())
-  .openOn(map);
-  console.log("Clicked on the map");
-  }
+    // Bind popup to Data Point object
+    myDataPoint.bindPopup("<h3>Auraria Library</h3><p>Denver, CO</p>");
+    // Bind popup to area object
+    myArea.bindPopup("Auraria Campus");
 
-  // Listen for a click event on the Map element
-  map.on('click', onMapClick);
+    // Create an Empty Popup
+    var popup = L.popup();
 
-  //load a geojson from an externalfile
-    $.getJSON("buildings.json",function(data){
-    	// add GeoJSON layer to the map once the file is loaded
-        L.geoJson(data,{
-            onEachFeature: function (feature, layer) {
-                layer.bindPopup("Building Type: " + feature.properties.BLDG_TYPE +
-                "<br>Building Height: " +  feature.properties.BLDG_HEIGH +
-                "<br>Ground Elevation: " + feature.properties.GROUND_ELE);
-        	}
-        }
-    	).addTo(map);
+    // Write function to set Properties of the Popup
+    function onMapClick(e) {
+    popup
+    .setLatLng(e.latlng)
+    .setContent("You clicked the map at " + e.latlng.toString())
+    .openOn(map);
+    console.log("Clicked on the map");
+    }
+
+    // Listen for a click event on the Map element
+    map.on('click', onMapClick);
+    var buildings;
+    //load a geojson from an externalfile
+      $.getJSON("buildings.json",function(data){
+      	// add GeoJSON layer to the map once the file is loaded
+        buildings = L.geoJson(data,{
+              onEachFeature: function (feature, layer) {
+                  layer.bindPopup("Building Type: " + feature.properties.BLDG_TYPE +
+                  "<br>Building Height: " +  feature.properties.BLDG_HEIGH +
+                  "<br>Ground Elevation: " + feature.properties.GROUND_ELE);
+          	}
+          }
+      	);
+        layerMenu.addOverlay(buldings, "Buildings");
+      });
+
+    // Closing for the document.ready function
     });
-
-  // Closing for the document.ready function
-  });
 
 </script>
 

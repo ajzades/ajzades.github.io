@@ -27,7 +27,7 @@
                          });
 
                     //part two of lab, add basemaps
-                    var basemaps = {"Default Basemap:" , defaultbase,
+                    var basemaps = {"Default Basemap:" , defaultBase,
                                     "Stamen Watercolor" : Stamen_Watercolor};
                     var overlays = {};
                     var layerMenu = L.control.layers(basemaps, overlays).addTo(map);
@@ -61,6 +61,7 @@
 
     // Listen for a click event on the Map element
     map.on('click', onMapClick);
+    
     var buildings;
     //load a geojson from an externalfile
       $.getJSON("buildings.json",function(data){

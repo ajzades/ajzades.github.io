@@ -26,15 +26,15 @@
   	                       ext: 'jpg'
                          });
 
-                         // USGS topographic
-                         var USGS_USImagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
-	                          maxZoom: 20,
-	                           attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
-                           });
+
+                           //ESRI Image
+                           var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	                            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                            });
 
                     var basemaps = {"Default Basemap" :  defaultBase,
                                     "Stamen Watercolor" : Stamen_Watercolor,
-                                      "USGS Topo": USGS_USImagery};
+                                      "ESRI" : Esri_WorldImagery};
 
                     var overlays = { };
                     var layerMenu = L.control.layers(basemaps, overlays).addTo(map);

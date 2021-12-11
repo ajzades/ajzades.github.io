@@ -26,9 +26,10 @@
   	                       ext: 'jpg'
                          });
 
-                    var basemaps = {"Default Basemap:" , defaultBase,
+                    var basemaps = {"Default Basemap" : , defaultBase,
                                     "Stamen Watercolor" : Stamen_Watercolor};
-                    var overlays = {};
+
+                    var overlays = { };
                     var layerMenu = L.control.layers(basemaps, overlays).addTo(map);
 
                     // Create point feature for Auraria Library
@@ -36,8 +37,8 @@
 
     // Create area feature for campus, style and add to map
     var myArea = L.polygon([[39.740652, -105.010233], [39.743218, -105.011864],
-    [39.748473, -105.002487], [39.740283, -104.999037]],
-    {color: 'blue', weight: 4}).addTo(map);
+                            [39.748473, -105.002487], [39.740283, -104.999037]],
+                            {color: 'blue', weight: 4}).addTo(map);
     layerMenu.addOverlay(myArea, "Auraria Campus");
     layerMenu.addOverlay(myDataPoint, "Auraria Library");
 
